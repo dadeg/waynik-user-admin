@@ -1,0 +1,322 @@
+{% extends layout_template  %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+    {% if app.user %}
+        <p>Hello, {{ app.user.displayName }}. You are already registered and signed in.</p>
+        <p><a href="{{ path('user.logout') }}">Sign out</a></p>
+
+    {% else %}
+        <h1>
+            Create an account
+        </h1>
+
+        <p class="text-muted lead">
+            Already have an account? <a href="{{ path('user.login') }}">Sign in now.</a>
+        </p>
+
+        {% if error %}
+            <div class="alert alert-danger">{{ error|nl2br }}</div>
+        {% endif %}
+
+        <form class="form-horizontal" method="POST">
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-name">Name</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="name" type="text" id="input-name" placeholder="Name" value="{{ name }}">
+                    <!--span class="help-inline">Shown publicly</span-->
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-email">Email</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="email" type="email" id="input-email" placeholder="Email" required value="{{ email }}">
+                    <!--span class="help-inline">Never shared</span-->
+                </div>
+            </div>
+
+            {% if isUsernameRequired %}
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="input-username">Username</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" name="username" type="text" id="input-username" placeholder="Username" required value="{{ username }}">
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-password">Password</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="password" type="password" id="input-password" required placeholder="Password">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-confirm-password">Re-type password</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="confirm_password" type="password" id="input-confirm-password" required placeholder="Confirm password">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-primary-phone">Primary Phone Number</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="primaryPhone" type="tel" id="input-primary-phone">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-secondary-phone">Secondary Phone Number</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="secondaryPhone" type="tel" id="input-secondary-phone">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-tertiary-phone">Tertiary Phone Number</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="tertiaryPhone" type="tel" id="input-tertiary-phone">
+                </div>
+            </div>
+
+            <div class="form-group">
+                
+                <label class="col-sm-2 control-label" for="input-cellular-connectivity">Does your device have cell network access?</label>
+                <div class="col-sm-8">
+					<input id='cellularConnectivityHidden' type='hidden' value='0' name='cellularConnectivity'>
+                    <input type="checkbox" class="form-control" name="cellularConnectivity" id="input-cellular-connectivity" value='1'>
+                </div>
+            </div>
+            
+            <h4>Permanent Address</h4>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-permanent-street">Street</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="permanentAddressStreet" type="tel" id="input-permanent-street">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-permanent-street2">Street 2</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="permanentAddressStreet2" type="tel" id="input-permanent-street2">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-permanent-city">City</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="permanentAddressCity" type="tel" id="input-permanent-city">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-permanent-state">State/Region</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="permanentAddressState" type="tel" id="input-permanent-state">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-permanent-state">Country/Region</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="permanentAddressCountry" type="tel" id="input-permanent-country">
+                </div>
+            </div>
+            
+            <h4>Current Address</h4>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-current-street">Street</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="currentAddressStreet" type="tel" id="input-current-street">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-current-street2">Street 2</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="currentAddressStreet2" type="tel" id="input-current-street2">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-current-city">City</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="currentAddressCity" type="tel" id="input-current-city">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-current-state">State/Region</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="currentAddressState" type="tel" id="input-current-state">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-current-state">Country/Region</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="currentAddressCountry" type="tel" id="input-current-country">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                
+                <label class="col-sm-2 control-label" for="input-current-next-year">Will you be living at your current address for the next 6-12 months?</label>
+                <div class="col-sm-8">
+					<input id='currentAddressNext12MonthsHidden' type='hidden' value='0' name='currentAddressNext12Months'>
+                    <input type="checkbox" class="form-control" name="currentAddressNext12Months" id="input-current-next-year" value='1'>
+                </div>
+            </div>
+            
+            <h4>Primary Emergency Contact</h4>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-primary-emergency-name">Name/Organization</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="primaryEmergencyContactName" type="text" id="input-primary-emergency-name">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-primary-emergency-phone">Phone Number</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="primaryEmergencyContactPhone" type="tel" id="input-primary-emergency-phone">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-primary-emergency-email">Email</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="primaryEmergencyContactEmail" type="text" id="input-primary-emergency-email">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-primary-emergency-relation">Relation to You</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="primaryEmergencyContactRelation" type="text" id="input-primary-emergency-relation">
+                </div>
+            </div>
+            
+            <h4>Secondary Emergency Contact</h4>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-secondary-emergency-name">Name/Organization</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="secondaryEmergencyContactName" type="text" id="input-secondary-emergency-name">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-secondary-emergency-phone">Phone Number</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="secondaryEmergencyContactPhone" type="tel" id="input-secondary-emergency-phone">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-secondary-emergency-email">Email</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="secondaryEmergencyContactEmail" type="text" id="input-secondary-emergency-email">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-secondary-emergency-relation">Relation to You</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="secondaryEmergencyContactRelation" type="text" id="input-secondary-emergency-relation">
+                </div>
+            </div>
+
+ 			<h4>Personal Information</h4>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-travel-plans">Locations you will travel to in the next 6-12 months</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="travelPlans" type="text" id="input-travel-plans">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-languages-spoken">Languages Spoken</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="languagesSpoken" type="text" id="input-languages-spoken">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-height">Height (inches)</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="height" type="text" id="input-height">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-eye-color">Hair Color</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="hairColor" type="text" id="input-hair-color">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-eye-color">Eye Color</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="eyeColor" type="text" id="input-eye-color">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-nationality">Nationality</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="nationality" type="text" id="input-nationality">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-gender">Gender</label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="gender" id="input-gender">
+                    	<option value=""></option>
+                    	<option value="female">Female</option>
+                    	<option value="male">Male</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-10" for="input-info">Tell us a little more about your organization, 
+                nature of work abroad and anything else that may impact your security situation when you're abroad.</label>
+                
+            </div>
+            <div class="form-group">
+            	<div class="col-sm-10">
+                    <input class="form-control" name="generalInfo" type="text" id="input-info">
+                </div>
+    		</div>
+    		<div class="form-group">
+                <div class="col-sm-2">
+					<input id='disclaimerHidden' type='hidden' value='0' name='disclaimer'>
+                    <input type="checkbox" class="" name="disclaimer" id="input-disclaimer" value='1'>
+                </div>
+                <label class="col-sm-8" for="input-disclaimer">
+					I have read and agree to the <a href="http://www.waynik.com/terms/" target="_blank">terms</a>.
+				</label>
+                
+            </div>
+            
+            <div class="form-group">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </div>
+        </form>
+
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+web:
+  build: .
+  volumes:
+    - ~/practice/waynik/user-admin:/data/www
+  links:
+    - mysql
+  ports:
+    - 21001:80
+  environment:
+    MYSQL_DATABASE: waynik
+    MYSQL_USER: web
+    MYSQL_PASSWORD: way456nik789
+    MYSQL_HOST: mysql
+    APP_ENV: development
+
+mysql:
+  image: mysql
+  volumes:
+    - ~/practice/waynik/user-admin:/data
+  command: mysqld --user=root --verbose --skip-sync-frm --innodb_flush_log_at_trx_commit=0 --innodb-support-xa=0 --bind-address=0.0.0.0 --sql-mode=NO_ENGINE_SUBSTITUTION
+  ports:
+    - 21002:3306
+  environment:
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_DATABASE: waynik
+    MYSQL_USER: web
+    MYSQL_PASSWORD: way456nik789

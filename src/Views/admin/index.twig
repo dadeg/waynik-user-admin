@@ -1,0 +1,11 @@
+{% extends 'admin/layout.twig' %}
+
+{% block title 'Admin Area ' %}
+{% block content %}
+    Welcome to the admin area for your Waynik account.
+    <ul><li><a href="{{ path('user') }}">Find your security token for the phone app</a></li>
+        <li><a href="{{ path('user.edit', { id: app.user.id }) }}">Edit your account here</a></li>
+        <li>Download the app for 
+            <a href="https://itunes.apple.com/us/app/waynik-transmitter/id1102645984?mt=8" target="_blank">Apple</a> 
+            and <a href="https://play.google.com/store/apps/details?id=com.waynik.client&hl=en" target="_blank">Android</a></ul>
+{% endblock content %}

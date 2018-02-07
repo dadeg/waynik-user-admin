@@ -1,0 +1,74 @@
+{#
+Template for an email message sent to confirm an email address.
+Variables passed to this template:
+    user: The SimpleUser\User instance.
+    confirmationUrl: The link to click to complete the confirmation process.
+#}
+
+{# The subject line. #}
+{%- block subject -%}{%- autoescape false -%}
+    Tips for getting started with Waynik
+{%- endautoescape -%}{%- endblock -%}
+
+{# The plain text message. #}
+{%- block body_text -%}{%- autoescape false -%}
+
+Thank you for signing up for Waynik. This service is still free for Waynik Beta users! 
+
+After completing your online registration, you need to download the Waynik app and register your device. 
+
+1. Download the Waynik App for Free on iTunes or GooglePlay. 
+Search "Waynik" and click Install to download the free application. 
+
+See https://www.waynik.com/images/welcome-email-1.png for a helpful image about this step.
+
+2. Access Your Unique Token Online at https://app.waynik.com
+Login at https://app.waynik.com using the email and password used for your registration 
+Save or write down your 10-digit "Token" composed of numbers and letters. Note: Token is not case sensitive. 
+
+See https://www.waynik.com/images/welcome-email-2.png for a helpful image about this step.
+
+3. Input Your Email + Token Into the Waynik App
+Input your email (used to register at https://www.waynik.com/admin) and unique Token on the home screen of the Waynik app
+
+See https://www.waynik.com/images/welcome-email-3.png for a helpful image about this step.
+
+4. Turn on the Waynik App
+Turn on Waynik by activating "Service Status". The button should appear green as pictured. 
+You will receive an email confirming that we have received your first location check-in and that your set-up is complete 
+
+See https://www.waynik.com/admin/images/welcome-email-4.png and https://www.waynik.com/admin/images/welcome-email-5.png for helpful images about this step.
+
+{%- endautoescape -%}{%- endblock -%}
+
+{# The HTML message. Optional. #}
+{%- block body_html -%}
+
+    <p>Thank you for signing up for Waynik. This service is still free for Waynik Beta users! </p>
+
+<p>After completing your online registration, you need to download the Waynik app and register your device.</p> 
+
+<p><strong>1. Download the Waynik App for Free on iTunes or GooglePlay.</strong><br /> 
+Search "Waynik" and click Install to download the free application. 
+</p>
+<p><img width='400' src="https://www.waynik.com/admin/images/welcome-email-1.png" /></p>
+<p><strong>
+2. Access Your Unique Token Online at <a href="https://www.waynik.com/admin">https://www.waynik.com/admin</a></strong><br />
+Login at <a href="https://www.waynik.com/admin">https://www.waynik.com/admin</a> using the email and password used for your registration 
+Save or write down your 10-digit "Token" composed of numbers and letters. Note: Token is not case sensitive. 
+</p><p>
+<img width='400' src="https://www.waynik.com/admin/images/welcome-email-2.png" />
+</p><p><strong>
+3. Input Your Email + Token Into the Waynik App</strong><br />
+Input your email (used to register at <a href="https://www.waynik.com/admin">https://www.waynik.com/admin</a>) and unique Token on the home screen of the Waynik app
+</p><p>
+<img width='400' src="https://www.waynik.com/admin/images/welcome-email-3.png" />
+</p><p><strong>
+4. Turn on the Waynik App</strong><br />
+Turn on Waynik by activating "Service Status". The button should appear green as pictured. 
+You will receive an email confirming that we have received your first location check-in and that your set-up is complete 
+</p>
+<p><img width='400' src="https://www.waynik.com/admin/images/welcome-email-4.png" /></p>
+<p><img width='400' src="https://www.waynik.com/admin/images/welcome-email-5.png" /></p>
+
+{%- endblock -%}
